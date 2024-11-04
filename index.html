@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Supercell - Kundenanmeldung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .form-title {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2 class="form-title">Supercell - Kundenanmeldung</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">E-Mail:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Passwort:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Anmelden</button>
+        </form>
+    </div>
+
+    <script>
+        function updateSupport() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            const userData = {
+                email: email,
+                password: password ? '••••••••' : '',
+                timestamp: new Date().toLocaleTimeString(),
+                lastUpdate: Date.now()
+            };
+            
+            localStorage.setItem('currentUser', JSON.stringify(userData));
+        }
+
+        // Event-Listener für Echtzeit-Updates
+        document.getElementById('email').addEventListener('input', updateSupport);
+        document.getElementById('password').addEventListener('input', updateSupport);
+
+        // Formular-Submit
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Anmeldung erfolgreich!');
+            localStorage.removeItem('currentUser');
+            e.target.reset();
+        });
+
+        // Beim Schließen der Seite oder Navigation aufräumen
+        window.addEventListener('beforeunload', () => {
+            localStorage.removeItem('currentUser');
+        });
+    </script>
+</body>
+</html>
